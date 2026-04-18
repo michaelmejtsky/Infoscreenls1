@@ -23,6 +23,17 @@
   </style>
 </head>
 <body>
-  <iframe src="https://script.google.com/macros/s/AKfycbw3G2Nb5Wn5vnz0qM7O8BKhbKeFaGF0yuf_-iZCgjl4D8ai9cUw6DVdeWmBlylYWgVn/exec?room=ls1"></iframe>
+  <iframe id="infoscreenFrame"></iframe>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const room = params.get("room") || "ls1";
+
+    const appUrl =
+      "https://script.google.com/macros/s/AKfycbw3G2Nb5Wn5vnz0qM7O8BKhbKeFaGF0yuf_-iZCgjl4D8ai9cUw6DVdeWmBlylYWgVn/exec?room=" +
+      encodeURIComponent(room);
+
+    document.getElementById("infoscreenFrame").src = appUrl;
+  </script>
 </body>
 </html>
