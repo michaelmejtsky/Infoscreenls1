@@ -24,30 +24,28 @@
     }
   </style>
 </head>
+
 <body>
   <iframe id="infoscreenFrame" src="about:blank"></iframe>
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const page = (params.get('page') || '').trim().toLowerCase();
-    const room = params.get('room') || 'ls1';
+
+    const page = (params.get("page") || "").trim().toLowerCase();
+    const room = params.get("room") || "ls1";
 
     const appBase =
-      'https://script.google.com/macros/s/AKfycbw3G2Nb5Wn5vnz0qM7O8BKhbKeFaGF0yuf_-iZCgjl4D8ai9cUw6DVdeWmBlylYWgVn/exec';
+      "https://script.google.com/macros/s/AKfycbw3G2Nb5Wn5vnz0qM7O8BKhbKeFaGF0yuf_-iZCgjl4D8ai9cUw6DVdeWmBlylYWgVn/exec";
 
     let appUrl;
 
-    if (page === 'standbild' || page === 'steuerung' || page === 'app' || page === 'control') {
-      // Spezialseiten 1:1 an die Apps-Script-Web-App weiterreichen.
-      // Dadurch funktionieren sowohl die mobile Steuer-App als auch
-      // die exklusive PlaySignage-Standbildseite über dieselbe GitHub-URL.
-      appUrl = appBase + '?' + params.toString();
+    if (page === "standbild") {
+      appUrl = appBase + "?page=standbild";
     } else {
-      // Normaler Raum-/Infoscreenbetrieb.
-      appUrl = appBase + '?room=' + encodeURIComponent(room);
+      appUrl = appBase + "?room=" + encodeURIComponent(room);
     }
 
-    document.getElementById('infoscreenFrame').src = appUrl;
+    document.getElementById("infoscreenFrame").src = appUrl;
   </script>
 </body>
 </html>
