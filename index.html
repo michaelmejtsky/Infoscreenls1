@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Infoscreen</title>
+
   <style>
     html, body {
       margin: 0;
@@ -19,19 +20,34 @@
       height: 100%;
       border: none;
       display: block;
+      background: #000;
     }
   </style>
 </head>
+
 <body>
-  <iframe id="infoscreenFrame"></iframe>
+  <iframe id="infoscreenFrame" src="about:blank"></iframe>
 
   <script>
     const params = new URLSearchParams(window.location.search);
+
+    const page = (params.get("page") || "").trim().toLowerCase();
     const room = params.get("room") || "ls1";
 
-    const appUrl =
-      "https://script.google.com/macros/s/AKfycbw3G2Nb5Wn5vnz0qM7O8BKhbKeFaGF0yuf_-iZCgjl4D8ai9cUw6DVdeWmBlylYWgVn/exec?room=" +
-      encodeURIComponent(room);
+    const appBase =
+      "https://script.google.com/macros/s/AKfycbw3G2Nb5Wn5vnz0qM7O8BKhbKeFaGF0yuf_-iZCgjl4D8ai9cUw6DVdeWmBlylYWgVn/exec";
+
+    let appUrl;
+
+    if (page === "standbild") {
+      // PlaySignage-Standbild:
+      // Die Apps-Script-Web-App liefert ausschließlich die aktuell
+      // aktive globale Standbild-Aussendung.
+      appUrl = appBase + "?page=standbild";
+    } else {
+      // Normaler Raum-/Infoscreenbetrieb.
+      appUrl = appBase + "?room=" + encodeURIComponent(room);
+    }
 
     document.getElementById("infoscreenFrame").src = appUrl;
   </script>
