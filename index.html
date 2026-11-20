@@ -33,6 +33,7 @@
 
     const page = (params.get("page") || "").trim().toLowerCase();
     const room = params.get("room") || "ls1";
+    const idle = (params.get("idle") || "kdo").trim().toLowerCase();
 
     const appBase =
       "https://ffstp-infoscreen.michael-mejtsky.workers.dev/";
@@ -42,7 +43,10 @@
     if (page === "standbild") {
       appUrl = appBase + "?page=standbild";
     } else {
-      appUrl = appBase + "?room=" + encodeURIComponent(room);
+      appUrl =
+        appBase +
+        "?room=" + encodeURIComponent(room) +
+        "&idle=" + encodeURIComponent(idle);
     }
 
     document.getElementById("infoscreenFrame").src = appUrl;
